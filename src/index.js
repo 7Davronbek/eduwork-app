@@ -6,15 +6,24 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style/main.scss";
 import "./style/cabmain.scss";
+import { Provider } from "react-redux";
+import { rootReducers } from "./redux/reducers/rootReducers";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
+import { applyMiddleware, createStore } from "redux";
+
+const store = createStore(
+  rootReducers,
+  composeWithDevTools(applyMiddleware(thunk))
+)
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store} >
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
