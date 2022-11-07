@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_PATH } from "../../tools/constants";
+import { API_PATH, USER_TOKEN } from "../../tools/constants";
 import { UPDATE_AUTH } from "../types/auth"
 
 
@@ -40,6 +40,22 @@ export const REGISTERVERIFY = (phone, code, password) => async dispatch => {
             .then((res) => {
                 console.log(res);
                 dispatch(updateAuth({ isVerify: false, isLogin: true }))
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const LOGIN = (phone, password, nav) => async dispatch => {
+    try {
+        await axios.post(API_PATH + '/accounts/login/', { phone, password })
+            .then((res) => {
+                console.log(res);
+                localStorage.setItem(USER_TOKEN, res.data.token)
+                nav('/Orders', { replace: true })
             })
             .catch((err) => {
                 console.log(err);

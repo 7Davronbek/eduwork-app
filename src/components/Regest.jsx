@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row } from 'reactstrap';
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import { REGISTER, REGISTERVERIFY } from '../redux/actions/authAction';
-// import { useNavigate } from 'react-router-dom';
+import { LOGIN, REGISTER, REGISTERVERIFY } from '../redux/actions/authAction';
+import { useNavigate } from 'react-router-dom';
 
 const Regest = () => {
 
@@ -16,13 +16,16 @@ const Regest = () => {
     }
 
     const dispatch = useDispatch()
-    // const nav = useNavigate()
+    const nav = useNavigate()
     const verification = useSelector(state => state.auth.isVerify)
 
     const [phone, setPhone] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [code, setCode] = useState('')
+
+    const [loginPhone, setLoginPhone] = useState('')
+    const [loginPassword, setLoginPassword] = useState('')
 
     const registration = (e) => {
         e.preventDefault()
@@ -31,6 +34,11 @@ const Regest = () => {
 
     const verifyRegistration = () => {
         dispatch(REGISTERVERIFY(phone, code, password))
+    }
+
+    const login = (e) => {
+        e.preventDefault()
+        dispatch(LOGIN(loginPhone, loginPassword, nav))
     }
 
     return (
@@ -63,16 +71,16 @@ const Regest = () => {
                                 </div>
                                 <TabContent activeTab={activeTab}>
                                     <TabPane tabId="1" className=''>
-                                        <Row className='myRow'>
+                                        <form onSubmit={login} className='myRow'>
                                             <div className="regestr_tab_name">Вход</div>
-                                            <input className='regestr_inp form-control' placeholder='Телефон' type="text" name="" id="" />
-                                            <input className='regestr_inp form-control' placeholder='Пароль' type="text" name="" id="" />
+                                            <input onChange={e => setLoginPhone(e.target.value)} value={loginPhone} required className='regestr_inp form-control' placeholder='Телефон' type="text" name="" id="" />
+                                            <input onChange={e => setLoginPassword(e.target.value)} value={loginPassword} required className='regestr_inp form-control' placeholder='Пароль' type="password" name="" id="" />
                                             <a href='' className="regestr_tab_res">Восстановить пароль</a>
                                             <div className="regestr_btn">
-                                                <a href=""><button>Войти </button></a>
+                                                <a href=""><button type='submit'>Войти </button></a>
                                                 {/* <a href=""><button>Регистрация </button></a> */}
                                             </div>
-                                        </Row>
+                                        </form>
                                     </TabPane>
                                 </TabContent>
                                 <TabContent activeTab={activeTab}>
