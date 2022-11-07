@@ -2,7 +2,8 @@ import { UPDATE_AUTH } from "../types/auth"
 
 const initialState = {
     isLoading: false,
-    error: false
+    error: false,
+    isVerify: false
 }
 
 export const authReducer = (state = initialState, action) => {
