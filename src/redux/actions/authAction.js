@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_PATH, USER } from "../../tools/constants";
+import { API_PATH } from "../../tools/constants";
 import { UPDATE_AUTH } from "../types/auth"
 
 
@@ -39,7 +39,7 @@ export const REGISTERVERIFY = (phone, code, password) => async dispatch => {
         await axios.post(API_PATH + '/accounts/verify-register/', { phone, code, password })
             .then((res) => {
                 console.log(res);
-                dispatch(updateAuth({ isVerify: false }))
+                dispatch(updateAuth({ isVerify: false, isLogin: true }))
             })
             .catch((err) => {
                 console.log(err);

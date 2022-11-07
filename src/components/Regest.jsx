@@ -3,9 +3,11 @@ import { TabContent, TabPane, Nav, NavItem, NavLink, Row } from 'reactstrap';
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { REGISTER, REGISTERVERIFY } from '../redux/actions/authAction';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const Regest = () => {
+
+    const isLogin = useSelector(state => state.auth.isLogin)
 
     const [activeTab, setActiveTab] = useState('2');
 

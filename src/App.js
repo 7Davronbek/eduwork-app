@@ -2,7 +2,6 @@ import React from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import Paid from "./components/Cabi/Paid";
 import Spravocnik from "./components/Cabi/Spravocnik";
-import PhoneVerify from "./components/PhoneVerify";
 import ScrollToTop from "./components/ScrollToTop";
 import Claims from "./pages/Cabinet/Claims";
 import Finans from "./pages/Cabinet/Finans";
@@ -38,7 +37,6 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Registration" element={<Registration />} />
-          <Route path="/Verify" element={<PhoneVerify />} />
           <Route path="/Servic" element={<Servic />} />
           <Route path="/NewOrder" element={<NewOrder />} />
           <Route path="/OrderAuthor" element={<OrderAuthor />} />
